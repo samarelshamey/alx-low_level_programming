@@ -3,7 +3,7 @@
 /**
  * main -Enrty point
  *
- * Description: putchar
+ * Description: print lowercase alphabet using putchar
  *
  * Return: 0 (success)
 */
