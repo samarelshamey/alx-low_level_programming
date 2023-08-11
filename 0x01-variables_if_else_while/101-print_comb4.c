@@ -42,6 +42,5 @@ int main(void)
 	dig1++;
 	}
 	putchar ('\n');
-	
 	return (0);
 }
