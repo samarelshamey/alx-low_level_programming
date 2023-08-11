@@ -1,7 +1,7 @@
-#include <stdio>
+#include <stdio.h>
 
 /**
- * main - Entry 
+ * main - Entry
  *
  * Description: all numbers
  *
@@ -11,9 +11,10 @@
 int main(void)
 {
 	int num = 0;
+
 	while (num <= 9)
 	{
-		printf("%d, num");
+		printf("%i", num);
 		num++;
 	}
 	printf("\n");
