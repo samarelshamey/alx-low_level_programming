@@ -26,9 +26,9 @@ int main(void)
 					dig2 != dig3 &&
 					dig2 < dig3)
 				{
-					putchar (dig1 + 48);
-					putchar (dig2 + 48);
-					putchar (dig3 + 48);
+					putchar(dig1 + 48);
+					putchar(dig2 + 48);
+					putchar(dig3 + 48);
 					if (dig1 + dig2 + dig3 != 24)
 					{
 						putchar (',');
