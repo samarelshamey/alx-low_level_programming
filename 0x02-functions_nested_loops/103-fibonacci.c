@@ -1,8 +1,8 @@
 #include <stdio.h>
 /**
- * main - etry point
+ * main - entry point
  *
- * Description: prints the first 50 Fibonacci numbers, starting with 1 and 2
+ * description: finds and prints the sum of the even-valued terms
  *
  * Return: 0 (success)
 */
@@ -15,7 +15,6 @@ int main(void)
 	while (1)
 	{
 		sum = x + y;
-
 		if (sum > 4000000)
 			break;
 		if ((sum % 2) == 0)
@@ -24,6 +23,5 @@ int main(void)
 		y = sum;
 	}
 	printf("%.0f\n", total);
-
 	return (0);
 }
