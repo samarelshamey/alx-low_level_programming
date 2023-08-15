@@ -1,4 +1,4 @@
-#include <main.h>
+#include "main.h"
 
 /**
  * main - entry poitn
@@ -11,10 +11,12 @@
 int main(void)
 {
 	char string[] = "_putchar";
-	int ch = 0;
+	int ch;
 
 	for (ch = 0; ch < 8; ch++)
+	{
 		_putchar(string[ch]);
-		_putchar('\n');
+	}
+	_putchar('\n');
 	return (0);
 }
