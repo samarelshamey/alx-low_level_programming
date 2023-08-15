@@ -5,7 +5,7 @@
  *
  * @y : input
  *
- * Return : sum
+ * Return:  sum of x and y
 */
 int add(int x, int y)
 {
