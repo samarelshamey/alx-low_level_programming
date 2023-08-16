@@ -1,19 +1,18 @@
 #include <stdio.h>
 /**
- * main - entry point
- *
  * print_fibonacci - function to print fibonacci sequence
  *
  * Return: 0 (success)
 */
-
 void print_fibonacci(void)
 {
-	int a = 1;
-	int b = 2;
-	int c, i;
+	unsigned int a = 1;
+	unsigned int b = 2;
+	unsigned int c;
+	unsigned int i;
 
 	printf("%d, %d", a, b);
+
 	for (i = 3; i <= 98; i++)
 	{
 		c = a + b;
@@ -23,6 +22,13 @@ void print_fibonacci(void)
 	}
 	printf("\n");
 }
+/**
+ * main - entry point
+ *
+ * Description: print sequence
+ *
+ * Return 0 (succes)
+*/
 
 int main(void)
 {
