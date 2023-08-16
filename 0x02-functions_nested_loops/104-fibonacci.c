@@ -1,37 +1,60 @@
-#include <stdio.h>
+#include "main.h"
+
 /**
- * print_fibonacci - function to print fibonacci sequence
+ * numLength - return the lenght of the string
  *
- * Return: 0 (success)
+ * @n: operand number
+ *
+ * Return: number of digits
 */
-void print_fibonacci(void)
+int numLength(int n)
 {
-	unsigned int a = 1;
-	unsigned int b = 2;
-	unsigned int c;
-	unsigned int i;
+	int length = 0;
 
-	printf("%d, %d", a, b);
-
-	for (i = 3; i <= 98; i++)
+	if (!n)
+		return (1);
+	while (n)
 	{
-		c = a + b;
-		printf(", %d", c);
-		a = b;
-		b = c;
+		n = n / 10;
+		length += 1;
 	}
-	printf("\n");
+	return (length);
 }
 /**
  * main - entry point
  *
- * Description: print sequence
+ * description : prints the firs 98 fibonacci numbers
  *
- * Return 0 (succes)
+ * Return: 0 (success)
 */
 
 int main(void)
 {
-	print_fibonacci();
+	int count, initia10s;
+	unsigned long x = 1, y = 2, sum, max = 100000000, xo = 0, yo = 0, sumo = 0;
+
+	for (count = 1; count <= 98; count++)
+	{
+		if (xo > 0)
+			printf("%lu", xo);
+		initia10s = numLength(max) - 1 - numLength(x);
+		while (xo > 0 && initia10s > 0)
+		{
+			printf("%d", 0);
+			initia10s--;
+		}
+		printf("%lu", x);
+		sum = (x + y) % max;
+		sumo = xo + yo + (x + y) / max;
+		x = y;
+		xo = yo;
+		y = sum;
+		yo = sumo;
+
+		if (count != 98)
+			printf(", ");
+		else
+			printf("\n");
+	}
 	return (0);
 }
