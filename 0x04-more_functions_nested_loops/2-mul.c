@@ -7,7 +7,7 @@
  *
  * @b: second integer
  *
- * Return: 0 (success)
+ * Return: a * b
 */
 
 int mul(int a, int b)
