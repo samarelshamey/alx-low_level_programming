@@ -9,9 +9,9 @@
  * Return: 0 (success)
 */
 
-int is_prime(long long n)
+int is_prime(long n)
 {
-	long long int i;
+	long int i;
 
 	if (n <= 1)
 	{
@@ -35,10 +35,10 @@ int is_prime(long long n)
  * Return: largest_factor
 */
 
-long long largest_prime_factor(long long n)
+long largest_prime_factor(long n)
 {
-	long long int i;
-	long long largest_factor = -1;
+	long int i;
+	long largest_factor = -1;
 
 	for (i = 2; i <= sqrt(n); i++)
 	{
@@ -64,9 +64,9 @@ long long largest_prime_factor(long long n)
 
 int main(void)
 {
-	long long number = 612852475143;
-	long long largest_factor = largest_prime_factor(number);
+	long number = 612852475143;
+	long largest_factor = largest_prime_factor(number);
 
-	printf("%lld\n", largest_factor);
+	printf("%ld\n", largest_factor);
 	return (0);
 }
