@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "main.h"
 
 /**
  * main - entry point
@@ -9,12 +10,10 @@
 int main(void)
 {
 	int n = 402;
-	int *ptr;
+	int *ptr = &n;
 
-	ptr = &n;
-
-	printf("value of n is %d", n);
+	_putchar(n);
 	*ptr = 98;
-	printf("updated value of n is %d", *ptr);
+	_putchar(n);
 	return (0);
 }
