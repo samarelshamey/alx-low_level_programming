@@ -10,22 +10,16 @@
 
 void rev_string(char *s)
 {
-	int len = 0;
+	int len;
 	int i;
+	char temp;
 
-	while (len != '\0')
-		len++;
-	for (i = len - 1; i >= 0; i--)
-		_putchar(s[i]);
-}
-/**
- * main - entry point
- *
- * Return: 0 (success)
-*/
-
-int main(void)
-{
-	rev_string(*s);
-	return (0);
+	for (len = 0; s[len] != '\0'; len++)
+		;
+	for (i = 0; i < len / 2; i++)
+	{
+		temp = s[i];
+		s[i] = s[len - 1 - i];
+		s[len - 1 - i] = temp;
+	}
 }
