@@ -17,5 +17,15 @@ void rev_string(char *s)
 		len++;
 	for (i = len - 1; i >= 0; i--)
 		_putchar(s[i]);
-	_putchar('\n');
+}
+/**
+ * main - entry point
+ *
+ * Return: 0 (success)
+*/
+
+int main(void)
+{
+	rev_string(*s);
+	return (0);
 }
