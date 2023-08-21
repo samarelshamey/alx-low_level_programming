@@ -1,19 +1,14 @@
-#include <stdio.h>
 #include "main.h"
 
 /**
- * main - entry point
+ * reset_to_98 - change value of n to 98
+ *
+ * @n: integer
  *
  * Return: 0 (success)
 */
 
-int main(void)
+void reset_to_98(int *n)
 {
-	int n = 402;
-	int *ptr = &n;
-
-	_putchar(n);
-	*ptr = 98;
-	_putchar(n);
-	return (0);
+	*n = 98;
 }
