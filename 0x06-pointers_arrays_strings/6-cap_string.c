@@ -1,37 +1,4 @@
 #include "main.h"
-/**
- * isLower - function to lowercase
- *
- * Description: function to lowercase
- *
- * @c: character
- *
- * Return: character
-*/
-
-int isLower(char c)
-{
-	return (c >= 97 && c <= 122);
-}
-
-/**
- * isDelimiter - function
- *
- * @c : char
- *
- * Return: index
-*/
-
-int isDelimiter(char c)
-{
-	int i;
-	char delimiter[] = " \n\t,;.!?\"(){}";
-
-	for (i = 0; i < 12; i++)
-		if (c == delimiter[i])
-			return (i);
-	return (0);
-}
 
 /**
  * cap_string - function to capitalize words
@@ -43,15 +10,16 @@ int isDelimiter(char c)
 
 char *cap_string(char *s)
 {
-	int cap_next = 1;
+	int i;
+	int capitalize_next = 1;
 
-	for (int i = 0; s[i] != '\0'; i++)
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		if (cap_next && s[i] >= 'a' && s[i] <= 'z')
+		if (capitalize_next && s[i] >= 97 && s[i] <= 122)
 		{
 			s[i] -= 32;
 		}
-		cap_next = 0;
+		capitalize_next = 0;
 		switch (s[i])
 		{
 			case ' ':
@@ -67,7 +35,7 @@ char *cap_string(char *s)
 			case ')':
 			case '{':
 			case '}':
-				cap_next = 1;
+				capitalize_next = 1;
 				break;
 		}
 	}
