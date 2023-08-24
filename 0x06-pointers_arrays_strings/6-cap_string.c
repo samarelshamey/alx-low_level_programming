@@ -1,11 +1,44 @@
 #include "main.h"
+/**
+ * isLower - function to lowercase
+ *
+ * Description: function to lowercase
+ *
+ * @c: character
+ *
+ * Return: character
+*/
+
+int isLower(char c)
+{
+	return (c >= 97 && c <= 122);
+}
+
+/**
+ * isDelimiter - function
+ *
+ * @c : char
+ *
+ * Return: index
+*/
+
+int isDelimiter(char c)
+{
+	int i;
+	char delimiter[] = " \n\t,;.!?\"(){}";
+
+	for (i = 0; i < 12; i++)
+		if (c == delimiter[i])
+			return (i);
+	return (0);
+}
 
 /**
  * cap_string - function to capitalize words
  *
  * @s: string
  *
- * Return: ptr
+ * Return: pointer
 */
 
 char *cap_string(char *s)
