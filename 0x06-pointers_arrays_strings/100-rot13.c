@@ -10,10 +10,10 @@
 
 char *rot13(char *s)
 {
-	int i;
+	int i = 0;
 	char c;
 
-	for (i = 0; s[i] != '\0'; i++)
+	while (s[i] != '\0')
 	{
 		c = s[i];
 		if ((c >= 'a' && c <= 'm') || (c >= 'A' && c <= 'Z'))
