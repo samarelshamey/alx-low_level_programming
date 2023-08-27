@@ -1,29 +1,25 @@
 #include "main.h"
 
 /**
- * rot13 - function
+ * rot13 - function to encrypt words
  *
  * @s: string
  *
  * Return: string
- */
+*/
 
 char *rot13(char *s)
 {
 	int i;
+	char c;
 
 	for (i = 0; s[i] != '\0'; i++)
 	{
-		char c = s[i];
-
-		if ((c >= 'A' && c <= 'M') || (c >= 'a' && c <= 'm'))
-		{
+		c = s[i];
+		if ((c >= 'a' && c <= 'm') || (c >= 'A' && c <= 'Z'))
 			s[i] += 13;
-		}
-		else if ((c >= 'N' && c <= 'Z') || (c >= 'n' && c <= 'z'))
-		{
+		else if ((c >= 'n' && c <= 'z') || (c >= 'N' && c <= 'Z'))
 			s[i] -= 13;
-		}
 	}
 	return (s);
 }
