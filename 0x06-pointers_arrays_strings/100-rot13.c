@@ -20,6 +20,7 @@ char *rot13(char *s)
 			s[i] += 13;
 		else if ((c >= 110 && c <= 122) || (c >= 78 && c <= 90))
 			s[i] -= 13;
+		i++;
 	}
 	return (s);
 }
