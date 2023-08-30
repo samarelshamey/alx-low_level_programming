@@ -41,12 +41,14 @@ int last_index(char *s)
  *
  * @end: intger
  *
+ * @mod: intger
+ *
  * Return: intger
 */
 
 int helper(char *s, int start, int end, int mod)
 {
-	if ((start == end && mod != 0) || (start == end +1 && mod == 0))
+	if ((start == end && mod != 0) || (start == end + 1 && mod == 0))
 		return (1);
 	else if (s[start] != s[end])
 		return (0);
