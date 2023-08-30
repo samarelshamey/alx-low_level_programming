@@ -13,4 +13,6 @@ int _sqrt_recursion(int n);
 int is_prime_number(int n);
 int help(int n, int value);
 int check(int n, int div);
+int helper(char *s, int start, int end, int mod);
+int last_index(char *s);
 #endif
