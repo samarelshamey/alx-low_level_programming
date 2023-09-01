@@ -13,8 +13,8 @@
 
 int main(int argc, char *argv[])
 {
-	int coins = 0;
 	int cents;
+	int coins = 0;
 
 	if (argc != 2)
 	{
@@ -27,17 +27,18 @@ int main(int argc, char *argv[])
 		printf("0\n");
 		return (0);
 	}
+	coins = 0;
 	coins += cents / 25;
 	cents %= 25;
 
 	coins += cents / 10;
-	coins %= 10;
+	cents %= 10;
 
 	coins += cents / 5;
-	coins %= 5;
+	cents %= 5;
 
 	coins += cents / 2;
-	coins %= 2;
+	cents %= 2;
 
 	coins += cents;
 	printf("%d\n", coins);
