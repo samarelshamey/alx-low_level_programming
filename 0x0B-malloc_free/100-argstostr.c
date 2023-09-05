@@ -35,6 +35,7 @@ char *argstostr(int ac, char **av)
 	}
 	for (i = 0; i < ac; i++)
 	{
+		arg_len = 0;
 		arg_len += strlen(av[i]);
 		strncpy(result + index, av[i], arg_len);
 		index += arg_len;
