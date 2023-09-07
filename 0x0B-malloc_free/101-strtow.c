@@ -42,11 +42,7 @@ int word_count(char *str)
 */
 char **strtow(char *str)
 {
-	int word_i = 0;
-	int word_len = 0;
-	int is_word = 0;
-	int i, j;
-	int num_words;
+	int word_i = 0, word_len = 0, is_word = 0, i, j, num_words;
 	char **words;
 
 	if (str == NULL || strlen(str) == 0)
