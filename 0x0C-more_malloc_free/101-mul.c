@@ -30,7 +30,7 @@ int multiply(int n1, int n2)
 int main(int argc, char *argv[])
 {
 	int i, num1, num2, mul;
-	char num1_str, num2_str;
+	char *num1_str, *num2_str;
 
 	if (argc != 3)
 	{
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 			return (98);
 		}
 	}
-	for (i = 0; num2_str != '\0'; i++)
+	for (i = 0; num2_str[i] != '\0'; i++)
 	{
 		if (!isdigit(num2_str[i]))
 		{
