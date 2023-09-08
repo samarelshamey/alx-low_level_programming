@@ -1,7 +1,5 @@
 #include "main.h"
-#include <stdlib.h>
 #include <ctype.h>
-#include <stdio.h>
 
 /**
  * multiply - function to multiple two numbers
@@ -46,20 +44,50 @@ int _atoi(const char *s)
 	int sign = 1;
 	unsigned long int res = 0, n1, i;
 
-	for (n1 = 0; !(s[n1] >= 48 && s[n1] <= 57); n1++)
+	for (n1 = 0; !isdigit(s[n1]); n1++)
 	{
 		if (n1 == '-')
 		{
 			sign = -1;
 		}
 	}
-	for (i = n1; s[n1] >= 48 && s[n1] <= 57; i++)
+	for (i = n1; isdigit(s[i]); i++)
 	{
 		res *= 10;
 		res += (s[i] - 48);
 	}
 	return (sign * res);
 }
+
+/**
+ * print_number - function to print number
+ *
+ * @num: number
+ *
+ * Return: nothing
+*/
+void print_number(int num)
+{
+	char s[20];
+	int i;
+
+	if (num < 0)
+	{
+		_putchar('-');
+		num = -num;
+	}
+	i = 0;
+	do {
+		s[i++] = num % 10 + '0';
+		num /= 10;
+	} while (num > 0);
+	while (i > 0)
+	{
+		_putchar(s[--i]);
+	}
+	_putchar('\n');
+}
+
 /**
  * main - enrtry point
  *
@@ -78,9 +106,9 @@ int main(int argc, char *argv[])
 	if (argc != 3)
 	{
 		_puts("Error");
+		_putchar('\n');
 		return (98);
 	}
-	_putchar('\n');
 	num1_str = argv[1];
 	num2_str = argv[2];
 	for (i = 0; num1_str[i] != '\0'; i++)
@@ -88,22 +116,22 @@ int main(int argc, char *argv[])
 		if (!isdigit(num1_str[i]))
 		{
 			_puts("Error");
+			_putchar('\n');
 			return (98);
 		}
-		_putchar('\n');
 	}
 	for (i = 0; num2_str[i] != '\0'; i++)
 	{
 		if (!isdigit(num2_str[i]))
 		{
 			_puts("Error");
+			_putchar('\n');
 			return (98);
 		}
-		_putchar('\n');
 	}
 	num1 = _atoi(num1_str);
 	num2 = _atoi(num2_str);
 	mul = multiply(num1, num2);
-	printf("%d\n", mul);
+	print_number(mul);
 	return (0);
 }
