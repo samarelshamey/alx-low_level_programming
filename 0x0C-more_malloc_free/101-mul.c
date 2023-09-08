@@ -1,122 +1,116 @@
 #include "main.h"
-#include <ctype.h>
+#include <stdio.h>
 #include <stdlib.h>
-/**
- * multiply - function to multiple two numbers
- *
- * @n1: number1
- *
- * @n2: number2
- *
- * Return: intger
-*/
+#include <string.h>
 
-int multiply(int n1, int n2)
-{
-	return (n1 * n2);
-}
 /**
- * _puts - function to print string
+ * _isdigit - checks if character is digit
+ * @c: character
+ *
+ * Return: 1 if digit, 0 otherwise
+ */
+int _isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+/**
+ * _strlen - check the length of  string
  *
  * @s: string
  *
- * Return: nothing
-*/
-void _puts(char *s)
+ * Return: integer
+ */
+int _strlen(char *s)
 {
 	int i = 0;
 
-	while (s[i])
-	{
-		_putchar(s[i]);
+	while (*s++)
 		i++;
-	}
+	return (i);
 }
+
 /**
- * _atoi - function convert a string to intger
+ * big_multiply - multiply two big number strings
+ * @s1: the first  string
+ * @s2: the second string
  *
- * @s: string
- *
- * Return: intger
-*/
-int _atoi(const char *s)
+ * Return: char
+ */
+char *big_multiply(char *s1, char *s2)
 {
-	int res = 0;
-	int sign = 1;
-	int i;
-	
-	for (i = 0; s[i] != '\0'; i++)
+	char *r;
+	int l1, l2, a, b, c, x;
+
+	l1 = _strlen(s1);
+	l2 = _strlen(s2);
+	r = malloc(a = x = l1 + l2);
+	if (!r)
+		printf("Error\n"), exit(98);
+	while (a--)
+		r[a] = 0;
+
+	for (l1--; l1 >= 0; l1--)
 	{
-		if (s[i] == '-')
+		if (!_isdigit(s1[l1]))
 		{
-			sign = -1;
+			free(r);
+			printf("Error\n"), exit(98);
 		}
-		else if (s[i] >= '0' && s[i] <= '9')
+		a = s1[l1] - '0';
+		c = 0;
+
+		for (l2 = _strlen(s2) - 1; l2 >= 0; l2--)
 		{
-			res = res * 10 + (s[i] - '0');
+			if (!_isdigit(s2[l2]))
+			{
+				free(r);
+				printf("Error\n"), exit(98);
+			}
+			b = s2[l2] - '0';
+
+			c += r[l1 + l2 + 1] + (a * b);
+			r[l1 + l2 + 1] = c % 10;
+
+			c /= 10;
 		}
-		else
-		{
-			_puts("Error");
-			_putchar('\n');
-			exit(98);
-		}
+		if (c)
+			r[l1 + l2 + 1] += c;
 	}
-	return (sign * res);
+	return (r);
 }
 
-/**
- * print_number - function to print number
- *
- * @num: number
- *
- * Return: nothing
-*/
-void print_number(int num)
-{
-	char s[20];
-	int i;
-
-	if (num < 0)
-	{
-		_putchar('-');
-		num = -num;
-	}
-	i = 0;
-	do {
-		s[i++] = num % 10 + '0';
-		num /= 10;
-	} while (num > 0);
-	while (i > 0)
-	{
-		_putchar(s[--i]);
-	}
-	_putchar('\n');
-}
 
 /**
- * main - enrtry point
- *
+ * main - entry point
  * @argc: count
+ * @argv: value
  *
- * @argv: values
- *
- * Return: intger
-*/
-
-int main(int argc, char *argv[])
+ * Return: Always 0 on success.
+ */
+int main(int argc, char **argv)
 {
-	int num1, num2, mul;
+	char *r;
+	int a, c, x;
 
 	if (argc != 3)
+		printf("Error\n"), exit(98);
+
+	x = _strlen(argv[1]) + _strlen(argv[2]);
+	r = big_multiply(argv[1], argv[2]);
+	c = 0;
+	a = 0;
+	while (c < x)
 	{
-		_puts("Error");
-		_putchar('\n');
-		exit(98);
+		if (r[c])
+			a = 1;
+		if (a)
+			_putchar(r[c] + '0');
+		c++;
 	}
-	num1 = _atoi(argv[1]);
-	num2 = _atoi(argv[2]);
-	mul = multiply(num1, num2);
-	print_number(mul);
+	if (!a)
+		_putchar('0');
+	_putchar('\n');
+	free(r);
 	return (0);
 }
