@@ -18,6 +18,49 @@ int multiply(int n1, int n2)
 	return (n1 * n2);
 }
 /**
+ * _puts - function to print string
+ *
+ * @s: string
+ *
+ * Return: nothing
+*/
+void _puts(char *s)
+{
+	int i = 0;
+
+	while (s[i])
+	{
+		_putchar(s[i]);
+		i++;
+	}
+}
+/**
+ * _atoi - function convert a string to intger
+ *
+ * @s: string
+ *
+ * Return: intger
+*/
+int _atoi(const char *s)
+{
+	int sign = 1;
+	unsigned long int res = 0, n1, i;
+
+	for (n1 = 0; !(s[n1] >= 48 && s[n1] <= 57); n1++)
+	{
+		if (n1 == '-')
+		{
+			sign = -1;
+		}
+	}
+	for (i = n1; s[n1] >= 48 && s[n1] <= 57; i++)
+	{
+		res *= 10;
+		res += (s[i] - 48);
+	}
+	return (sign * res);
+}
+/**
  * main - enrtry point
  *
  * @argc: count
@@ -34,29 +77,32 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		printf("Error\n");
+		_puts("Error");
 		return (98);
 	}
+	_putchar('\n');
 	num1_str = argv[1];
 	num2_str = argv[2];
 	for (i = 0; num1_str[i] != '\0'; i++)
 	{
 		if (!isdigit(num1_str[i]))
 		{
-			printf("Error\n");
+			_puts("Error");
 			return (98);
 		}
+		_putchar('\n');
 	}
 	for (i = 0; num2_str[i] != '\0'; i++)
 	{
 		if (!isdigit(num2_str[i]))
 		{
-			printf("Error\n");
+			_puts("Error");
 			return (98);
 		}
+		_putchar('\n');
 	}
-	num1 = atoi(num1_str);
-	num2 = atoi(num2_str);
+	num1 = _atoi(num1_str);
+	num2 = _atoi(num2_str);
 	mul = multiply(num1, num2);
 	printf("%d\n", mul);
 	return (0);
