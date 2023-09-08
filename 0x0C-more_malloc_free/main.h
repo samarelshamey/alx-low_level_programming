@@ -12,5 +12,5 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int multiply(int n1, int n2);
 void _puts(char *s);
 int _atoi(const char *s);
-
+void print_number(int num);
 #endif
