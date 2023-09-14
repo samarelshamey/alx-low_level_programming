@@ -1,7 +1,6 @@
+#include "3-calc.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include "3-calc.h"
 
 /**
  * main - entry point
@@ -13,25 +12,28 @@
  * Return: integer
 */
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	int num1, num2, res;
-	int (*operation)(int, int);
+	int (*op_func)(int, int), a, b;
 
 	if (argc != 4)
 	{
 		printf("Error\n");
-		return (1);
+		exit(98);
 	}
-	 num1 = atoi(argv[1]);
-	 num2 = atoi(argv[3]);
-	 operation = get_op_func(argv[2]);
-	 if (operation == NULL)
-	 {
-		 printf("Error\n");
-		 return (1);
-	 }
-	 res = operation(num1, num2);
-	 printf("%d\n", res);
-	 return (0);
+	a = atoi(argv[1]);
+	b = atoi(argv[3]);
+	op_func = get_op_func(argv[2]);
+	if (!op_func)
+	{
+		printf("Error\n");
+		exit(99);
+	}
+	if (!b && (argv[2][0] == '/' || argv[2][0] == '%'))
+	{
+		printf("Error\n");
+		exit(100);
+	}
+	printf("%d\n", op_func(a, b));
+	return (0);
 }
