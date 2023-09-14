@@ -1,6 +1,56 @@
 #include "variadic_functions.h"
 #include <stdarg.h>
+#include <stdio.h>
 
+/**
+ * charformat - format char
+ *
+ * @sep: string separator
+ *
+ * @ptr: pointer
+*/
+void charformat(char *sep, va_list ptr)
+{
+	printf("%s%c", sep, va_arg(ptr, int));
+}
+/**
+ * intformat - format int
+ *
+ * @sep: string separator
+ *
+ * @ptr: pointer
+*/
+void intformat(char *sep, va_list ptr)
+{
+	printf("%s%d", sep, va_arg(ptr, int));
+}
+/**
+ * floatformat - format float
+ *
+ * @sep: string
+ *
+ * @ptr: pointer
+*/
+void floatformat(char *sep, va_list ptr)
+{
+	printf("%s%f", sep, va_arg(ptr, double));
+}
+/**
+ * stringformat - format string
+ *
+ * @sep: string separator
+ *
+ * @ptr: pointer
+*/
+void stringformat(char *sep, va_list ptr)
+{
+	char *s = va_arg(ptr, char *);
+
+	switch ((int)(!s))
+		case 1:
+			s = "(nil)";
+	printf("%s%s", sep, s);
+}
 /**
  * print_all - function prints anything
  *
@@ -12,44 +62,30 @@
 void print_all(const char * const format, ...)
 {
 	va_list nptr;
-	const char *fmt;
-	char c, *s;
-	float f;
-	int i, count = 0;
+	int i = 0, j;
+	char *sep = "";
+	token_t tokens[] = {
+		{"c", charformat},
+		{"i", intformat},
+		{"f", floatformat},
+		{"s", stringformat},
+		{NULL, NULL}
+	};
 
 	va_start(nptr, format);
-	while (*fmt)
+	while (format && format[i])
 	{
-		if (count > 0)
-			printf(", ");
-		else if (*fmt == 'c')
+		j = 0;
+		while (tokens[j].token)
 		{
-			c = va_arg(nptr, int);
-			printf("%c", c);
-			count++;
+			if (format[i] == tokens[j].token[0])
+			{
+				tokens[j].f(sep, nptr);
+				sep = ", ";
+			}
+			j++;
 		}
-		else if (*fmt == 'i')
-		{
-			i = va_arg(nptr, int);
-			printf("%d", i);
-			count++;
-		}
-		else if (*fmt == 'f')
-		{
-			f = (float)va_arg(nptr, double);
-			printf("%f", f);
-			count++;
-		}
-		else if (*fmt == 's')
-		{
-			s = va_arg(nptr, char *);
-			if (s == NULL)
-				printf("nil");
-			else
-				printf("%s", s);
-			count++;
-		}
-		fmt++;
+		i++;
 	}
 	va_end(nptr);
 	printf("\n");
