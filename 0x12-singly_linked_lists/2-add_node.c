@@ -1,4 +1,5 @@
 #include "lists.h"
+#include <string.h>
 
 /**
  * *add_node - function to add node
@@ -10,7 +11,7 @@
  * Return: integer
 */
 
-list_t *add_node(list_t **head, const char *str);
+list_t *add_node(list_t **head, const char *str)
 {
 	list_t *ptr = malloc(sizeof(list_t));
 
