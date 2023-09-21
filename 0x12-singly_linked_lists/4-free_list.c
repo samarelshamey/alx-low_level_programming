@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * free_list - function 
+ * free_list - function
  *
  * @head: head
  *
