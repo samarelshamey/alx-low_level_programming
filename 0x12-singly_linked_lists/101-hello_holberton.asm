@@ -1,19 +1,11 @@
-assembly
-section .data
-	format db "Hello, Holberton", 0
-
 section .text
-	global _start
+	global main
+	extern printf
 
-extern printf
+main:
+	mov	edi, format
+	mov	eax, 0
+	call 	printf
 
-_start:
-	; Call printf
-	mov rdi, format
-	xor eax, eax
-	call printf
-
-	; Exit the program
-	xor edi, edi
-	mov eax, 60
-	syscall
+section .data
+	format db "Hello, Holberton", 0xa, 0
