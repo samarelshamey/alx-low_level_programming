@@ -4,7 +4,7 @@ section .data
 
 section .text
 	global _start
-
+extern printf
 _start:
 	; Call printf
 	mov rdi, format
