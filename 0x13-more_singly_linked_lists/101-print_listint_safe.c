@@ -14,11 +14,11 @@ size_t print_listint_safe(const listint_t *head)
 
 	while (temp != NULL)
 	{
-		printf("[%p] %d\n", (void *)temp, temp->n);
+		printf("[%#010x] %d\n", (unsigned int)(uintptr_t)temp, temp->n);
 		count++;
 		if (temp <= temp->next)
 		{
-			printf("-> [%p] %d\n", (void *)temp->next, temp->next->n);
+			printf("-> [%#010x] %d\n", (unsigned int)(uintptr_t)current->next, current->next->n);
 			break;
 		}
 		temp = temp->next;
