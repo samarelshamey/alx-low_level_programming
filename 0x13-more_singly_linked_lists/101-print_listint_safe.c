@@ -18,7 +18,7 @@ size_t print_listint_safe(const listint_t *head)
 		count++;
 		if (temp <= temp->next)
 		{
-			printf("-> [%#010x] %d\n", (unsigned int)(uintptr_t)current->next, current->next->n);
+			printf("-> [%#010x] %d\n", (unsigned int)(uintptr_t)temp->next, temp->next->n);
 			break;
 		}
 		temp = temp->next;
