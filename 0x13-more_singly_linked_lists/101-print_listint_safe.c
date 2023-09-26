@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * _reallocate - reallocate memory
+ * _r - reallocate memory
  *
  * @list: list
  *
