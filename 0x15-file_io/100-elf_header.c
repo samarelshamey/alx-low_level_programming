@@ -182,7 +182,7 @@ void print_osabi(Elf64_Ehdr h)
 			printf("UNIX - TRU64");
 			break;
 		default:
-			print_more_osabi(header);
+			print_more_osabi(h);
 			break;
 	}
 	printf("\n");
