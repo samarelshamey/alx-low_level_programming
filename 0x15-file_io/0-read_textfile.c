@@ -25,6 +25,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	bytesread = fread(ch, sizeof(char), letters, file);
 	if (bytesread > 0)
 	{
+		ch[bytesread] = '\0';
 		byteswritten = write(STDOUT_FILENO, ch, bytesread);
 		if (bytesread != byteswritten)
 		{
