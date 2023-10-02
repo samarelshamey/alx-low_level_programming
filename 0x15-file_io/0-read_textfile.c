@@ -14,7 +14,7 @@
 ssize_t read_textfile(const char *filename, size_t letters)
 {
 	FILE *file;
-	char ch[BUFFSIZE * 8];
+	char *ch;
 	ssize_t bytesread, byteswritten;
 
 	if (filename == NULL)
@@ -22,6 +22,13 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	file = fopen(filename, "r");
 	if (file == NULL)
 		return (0);
+	ch = (char *)malloc(letters + 1);
+	if (ch == NULL)
+	{
+		fclose(file);
+		free(ch);
+		return (0);
+	}
 	bytesread = fread(ch, sizeof(char), letters, file);
 	if (bytesread > 0)
 	{
