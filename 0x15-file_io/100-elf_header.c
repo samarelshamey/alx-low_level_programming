@@ -102,6 +102,46 @@ void print_version(Elf64_Ehdr h)
 	printf("\n");
 }
 /**
+ * print_more_osabi - prints more osabi
+ *
+ * @h: header
+ *
+ * Return: nothing
+*/
+void print_more_osabi(Elf64_Ehdr h)
+{
+	switch (h.e_ident[EI_OSABI])
+	{
+		case ELFOSABI_MODESTO:
+			printf("Nove11 - Modesto");
+			break;
+		case ELFOSABI_OPENBSD:
+			printf("UNIX - OpenBSD");
+			break;
+		case ELFOSABI_ARM:
+			printf("ARM");
+			break;
+		case ELFOSABI_STANDALONE:
+			printf("Standalone App");
+			break;
+		default:
+			printf("<unknown: %x>", h.e_ident[EI_OSABI]);
+			break;
+	}
+}
+/**
+ * print_abiversion - print abi version
+ *
+ * @h: header
+ *
+ * Return: void
+*/
+void print_abiversion(Elf64_Ehdr h)
+{
+	printf("  ABI Version:                       %d\n",
+			h.e_ident[EI_ABIVERSION]);
+}
+/**
  * print_osabi - print ELF osabi
  *
  * @h: header
@@ -125,6 +165,24 @@ void print_osabi(Elf64_Ehdr h)
 			break;
 		case ELFOSABI_LINUX:
 			printf("UNIX - LINUX");
+			break;
+		case ELFOSABI_SOLARIS:
+			printf("UNIX - Solaris");
+			break;
+		case ELFOSABI_AIX:
+			printf("UNIX - AIX");
+			break;
+		case ELFOSABI_IRIX:
+			printf("UNIX - IRIX");
+			break;
+		case ELFOSABI_FREEBSD:
+			printf("UNIX - FreeBSD");
+			break;
+		case ELFOSABI_TRU64:
+			printf("UNIX - TRU64");
+			break;
+		default:
+			print_more_osabi(header);
 			break;
 	}
 	printf("\n");
@@ -154,8 +212,8 @@ int main(int argc, char *argv[])
 	bytes = read(file, &header, sizeof(header));
 	if (bytes < 1 || bytes != sizeof(header))
 		print_error("Error: Failed to read ELF header\n", 98);
-	if (header.e_ident[0] == 0x7f && header.e_ident[1] == 'E' && header.e_ident[2]  == 'L' &&
-			header.e_ident[3] == 'F')
+	if (header.e_ident[0] == 0x7f && header.e_ident[1] == 'E' && 
+			header.e_ident[2]  == 'L' && header.e_ident[3] == 'F')
 	{
 		printf("ELF HEADER:\n");
 	}
