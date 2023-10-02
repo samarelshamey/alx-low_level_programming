@@ -40,7 +40,7 @@ void print_magic(Elf64_Ehdr h)
 void print_class(Elf64_Ehdr h)
 {
 	printf("  Class:                             ");
-	switch (h->e_ident[EI_CLASS])
+	switch (h.e_ident[EI_CLASS])
 	{
 		case ELFCLASS32:
 			printf("ELF32");
@@ -64,12 +64,12 @@ void print_class(Elf64_Ehdr h)
 void print_data(Elf64_Ehdr h)
 {
 	printf("  Data:                              ");
-	switch (h->e_ident[EI_DATA])
+	switch (h.e_ident[EI_DATA])
 	{
 		case ELFDATA2MSB:
 			printf("2's complement, big endian");
 			break;
-		case ELDDATA2LSB:
+		case ELFDATA2LSB:
 			printf("2's complement, little endian");
 			break;
 		case ELFDATANONE:
@@ -88,8 +88,8 @@ void print_data(Elf64_Ehdr h)
 
 void print_version(Elf64_Ehdr h)
 {
-	printf("  Version:                          %d ", h->eident[EI_VERSION]);
-	switch (h->e_ident[EI_VERSION])
+	printf("  Version:                          %d ", h.e_ident[EI_VERSION]);
+	switch (h.e_ident[EI_VERSION])
 	{
 		case EV_CURRENT:
 			printf(" (current)");
@@ -112,7 +112,7 @@ void print_version(Elf64_Ehdr h)
 void print_osabi(Elf64_Ehdr h)
 {
 	printf("  OS/ABI:                            ");
-	switch (h->eident[EI_OSABI])
+	switch (h.e_ident[EI_OSABI])
 	{
 		case ELFOSABI_NONE:
 			printf("UNIX - System V");
@@ -151,22 +151,22 @@ int main(int argc, char *argv[])
 	file = open(argv[1], O_RDONLY);
 	if (file == -1)
 		print_error("Error: Failed to open file\n", 98);
-	bytes = read(file, &h, sizeof(h));
-	if (bytes < 1 || bytes != sizeof(h))
+	bytes = read(file, &header, sizeof(header));
+	if (bytes < 1 || bytes != sizeof(header))
 		print_error("Error: Failed to read ELF header\n", 98);
-	if (h.e_ident[0] == 0x7f && h.e_ident[1] == 'E' && h.e_ident[2]  == 'L' &&
-			h.e_ident[3] == 'F')
+	if (header.e_ident[0] == 0x7f && header.e_ident[1] == 'E' && header.e_ident[2]  == 'L' &&
+			header.e_ident[3] == 'F')
 	{
 		printf("ELF HEADER:\n");
 	}
 	else
 		print_error("Error: Not ELF file\n", 98);
-	print_magic(h);
-	print_class(h);
-	print_data(h);
-	print_version(h);
-	print_osabi(h);
-	if (close(fd))
+	print_magic(header);
+	print_class(header);
+	print_data(header);
+	print_version(header);
+	print_osabi(header);
+	if (close(file))
 		print_error("Error: Failed to close file descriptor\n", 98);
 	return (EXIT_SUCCESS);
 }
