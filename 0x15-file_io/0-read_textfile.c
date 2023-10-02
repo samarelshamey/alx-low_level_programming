@@ -15,7 +15,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 {
 	FILE *file;
 	char ch[101];
-	size_t bytesread, byteswritten;
+	ssize_t bytesread, byteswritten;
 
 	if (filename == NULL)
 		return (0);
@@ -26,7 +26,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	if (bytesread > 0)
 	{
 		ch[bytesread] = '\0';
-		byteswritten = printf("%s", ch);
+		byteswritten = fwrite(ch, sizeof(char), bytesread, stdout);
 		if (bytesread != byteswritten)
 		{
 			fclose(file);
@@ -34,7 +34,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		}
 	}
 	fclose(file);
-	if (bytesread < letters)
+	if (bytesread < (ssize_t) letters)
 		return (bytesread);
 	else
 		return (0);
