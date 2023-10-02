@@ -29,7 +29,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		free(ch);
 		return (0);
 	}
-	bytesread = fread(ch, sizeof(char), letters, file);
+	bytesread = read(fileno(file), ch, letters);
 	if (bytesread > 0)
 	{
 		ch[bytesread] = '\0';
