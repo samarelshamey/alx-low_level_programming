@@ -141,24 +141,32 @@ void print_osabi(Elf64_Ehdr h)
 */
 int main(int argc, char *argv[])
 {
-	int fd;
+	int file;
 	Elf64_Ehdr header;
+	ssize_t bytes;
 
 	if (argc != 2)
 		print_error("Usage: elf_header elf_filename\n", 98);
 
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	file = open(argv[1], O_RDONLY);
+	if (file == -1)
 		print_error("Error: Failed to open file\n", 98);
-	if (read(fd, &header, sizeof(header)) != sizeof(header))
+	bytes = read(file, &h, sizeof(h));
+	if (bytes < 1 || bytes != sizeof(h))
 		print_error("Error: Failed to read ELF header\n", 98);
-	if (lseek(fd, 0, SEEK_SET) == -1)
-		print_error("Error: Failed to seek to the beginning of the file\n", 98);
+	if (h.e_ident[0] == 0x7f && h.e_ident[1] == 'E' && h.e_ident[2]  == 'L' &&
+			h.e_ident[3] == 'F')
+	{
+		printf("ELF HEADER:\n");
+	}
+	else
+		print_error("Error: Not ELF file\n", 98);
 	print_magic(h);
 	print_class(h);
 	print_data(h);
 	print_version(h);
 	print_osabi(h);
-	close(fd);
-	return (0);
+	if (close(fd))
+		print_error("Error: Failed to close file descriptor\n", 98);
+	return (EXIT_SUCCESS);
 }
