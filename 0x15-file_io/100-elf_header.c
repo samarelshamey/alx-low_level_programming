@@ -1,6 +1,8 @@
 #include "main.h"
 #include <elf.h>
 
+void print_more_osabi(Elf64_Ehdr h);
+
 /**
  * print_error - print error message
  *
@@ -44,13 +46,13 @@ void print_class(Elf64_Ehdr h)
 	{
 		case ELFCLASS32:
 			printf("ELF32");
-			break;
+		break;
 		case ELFCLASS64:
 			printf("ELF64");
-			break;
+		break;
 		case ELFCLASSNONE:
 			printf("none");
-			break;
+		break;
 	}
 	printf("\n");
 }
@@ -68,13 +70,13 @@ void print_data(Elf64_Ehdr h)
 	{
 		case ELFDATA2MSB:
 			printf("2's complement, big endian");
-			break;
+		break;
 		case ELFDATA2LSB:
 			printf("2's complement, little endian");
-			break;
+		break;
 		case ELFDATANONE:
 			printf("none");
-			break;
+		break;
 	}
 	printf("\n");
 }
@@ -88,15 +90,15 @@ void print_data(Elf64_Ehdr h)
 
 void print_version(Elf64_Ehdr h)
 {
-	printf("  Version:                          %d ", h.e_ident[EI_VERSION]);
+	printf("  Version:                           %d", h.e_ident[EI_VERSION]);
 	switch (h.e_ident[EI_VERSION])
 	{
 		case EV_CURRENT:
 			printf(" (current)");
-			break;
+		break;
 		case EV_NONE:
 			printf("%s", "");
-			break;
+		break;
 		break;
 	}
 	printf("\n");
@@ -272,7 +274,7 @@ void print_entry(Elf64_Ehdr h)
  *
  * Return: integer
 */
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 	int file;
 	Elf64_Ehdr header;
@@ -290,7 +292,7 @@ int main(int argc, char *argv[])
 	if (header.e_ident[0] == 0x7f && header.e_ident[1] == 'E' &&
 			header.e_ident[2]  == 'L' && header.e_ident[3] == 'F')
 	{
-		printf("ELF HEADER:\n");
+		printf("ELF Header:\n");
 	}
 	else
 		print_error("Error: Not ELF file\n", 98);
