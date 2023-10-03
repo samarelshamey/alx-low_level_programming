@@ -187,6 +187,81 @@ void print_osabi(Elf64_Ehdr h)
 	}
 	printf("\n");
 }
+/**
+ * print_type - prints ELF type
+ *
+ * @h: header
+ *
+ * Return: nothing
+*/
+void print_type(Elf64_Ehdr h)
+{
+	char *ptr = (char *)&h.e_type;
+	int i = 0;
+
+	printf("  Type:                              ");
+	if (h.e_ident[EI_DATA] == ELFDATA2MSB)
+		i = 1;
+	switch (ptr[i])
+	{
+		case ET_NONE:
+			printf("NONE (none)");
+			break;
+		case ET_REL:
+			printf("REL (Relocatable file)");
+			break;
+		case ET_EXEC:
+			printf("EXEC (Executable file)");
+			break;
+		case ET_DYN:
+			printf("DYN (Shared object file)");
+			break;
+		case ET_CORE:
+			printf("CORE (Core file)");
+			break;
+		default:
+			printf("<unknown>: %x", ptr[i]);
+		break;
+	}
+	printf("\n");
+}
+
+/**
+ * print_entry - prints ELF entry point
+ *
+ * @h: header
+ *
+ * Return: nothing
+*/
+
+void print_entry(Elf64_Ehdr h)
+{
+	int i = 0, len = 0;
+	unsigned char *ptr = (unsigned char *)&h.e_entry;
+
+	printf("  Entry point address:               0x");
+	if (h.e_ident[EI_DATA] != ELFDATA2MSB)
+	{
+		i = h.e_ident[EI_CLASS] == ELFCLASS64 ? 7 : 3;
+		while (!ptr[i])
+			i--;
+		printf("%x", ptr[i--]);
+		for (; i >= 0; i--)
+			printf("%02x", ptr[i]);
+		printf("\n");
+	}
+	else
+	{
+		i = 0;
+		len = h.e_ident[EI_CLASS] == ELFCLASS64 ? 7 : 3;
+		while (!ptr[i])
+			i++;
+		printf("%x", ptr[i++]);
+		for (; i <= len; i++)
+			printf("%02x", ptr[i]);
+		printf("\n");
+	}
+}
 
 /**
  * main - entry point
@@ -212,7 +287,7 @@ int main(int argc, char *argv[])
 	bytes = read(file, &header, sizeof(header));
 	if (bytes < 1 || bytes != sizeof(header))
 		print_error("Error: Failed to read ELF header\n", 98);
-	if (header.e_ident[0] == 0x7f && header.e_ident[1] == 'E' && 
+	if (header.e_ident[0] == 0x7f && header.e_ident[1] == 'E' &&
 			header.e_ident[2]  == 'L' && header.e_ident[3] == 'F')
 	{
 		printf("ELF HEADER:\n");
@@ -224,6 +299,9 @@ int main(int argc, char *argv[])
 	print_data(header);
 	print_version(header);
 	print_osabi(header);
+	print_abiversion(header);
+	print_type(header);
+	print_entry(header);
 	if (close(file))
 		print_error("Error: Failed to close file descriptor\n", 98);
 	return (EXIT_SUCCESS);
