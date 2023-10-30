@@ -1,4 +1,21 @@
 #include "main.h"
+/**
+ * _strlen - return length
+ *
+ * @s: string
+ *
+ * Return: intger
+*/
+int _strlen(char *s)
+{
+	int i = 0;
+
+	if (!s)
+		return (0);
+	while (*s++)
+		i++;
+	return (i);
+}
 
 /**
  * create_file - function
@@ -13,7 +30,7 @@
 int create_file(const char *filename, char *text_content)
 {
 	int file;
-	ssize_t bytes = 0, len = strlen(text_content);
+	ssize_t bytes = 0, len = _strlen(text_content);
 
 	if (!filename)
 		return (-1);
