@@ -1,5 +1,7 @@
 #include "main.h"
 
+#define BUF_SIZE 1024
+
 /**
  * read_textfile - function read and print text file
  *
@@ -7,34 +9,22 @@
  *
  * @letters: letters in the file
  *
- * Return: intger
+ * Return: bytes
 */
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	FILE *file;
-	char ch[letters + 1];
-	size_t bytesread, byteswritten;
+	int file;
+	char ch[BUF_SIZE * 8];
+	size_t byte;
 
-	if (filename == NULL)
+	if (!filename || !letters)
 		return (0);
-	file = fopen(filename, "r");
-	if (file == NULL)
+	file = open(filename, O_RDONLY);
+	if (file == -1)
 		return (0);
-	bytesread = fread(ch, sizeof(char), letters, file);
-	if (bytesread > 0)
-	{
-		ch[bytesread] = '\0';
-		byteswritten = printf("%s", ch);
-		if (byteswritten != bytesread)
-		{
-			fclose(file);
-			return (0);
-		}
-	}
-	fclose(file);
-	if (bytesread < letters)
-		return (bytesread);
-	else
-		return (0);
+	byte = read(file, &ch[0], letters);
+	byte = write(STDOUT_FILENO, &ch[0], byte);
+	close(file);
+	return (byte);
 }
