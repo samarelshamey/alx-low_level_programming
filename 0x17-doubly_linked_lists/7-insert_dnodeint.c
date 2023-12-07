@@ -1,16 +1,8 @@
 #include "lists.h"
 
-/**
- * insert_dnodeint_at_index - insert node at spec index
- *
- * @h: head
- * @idx: index
- * @n: data
- * Return: node
-*/
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	dlistint_t *new = NULL, *ptr = *h;
+	dlistint_t *ptr = *h, *new;
 
 	if (idx == 0)
 		return (add_dnodeint(h, n));
@@ -30,5 +22,6 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	new->next = ptr->next;
 	ptr->next->prev = new;
 	ptr->next = new;
+
 	return (new);
 }
