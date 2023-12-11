@@ -1,3 +1,3 @@
-#!/bin/python3
-gcc  -c -fPIC *.c
+#!/bin/bash
+gcc -c -fpic *.c
 gcc -shared *.o -o liball.so
